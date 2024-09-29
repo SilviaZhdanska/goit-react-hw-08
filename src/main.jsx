@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import App from "./App.jsx";
-import { fetchContacts } from "./redux/contactsOps";
+import { fetchContacts } from "./redux/contacts/operations"; // Імпорт з operations
 import "./index.css";
 
 const Root = () => {
