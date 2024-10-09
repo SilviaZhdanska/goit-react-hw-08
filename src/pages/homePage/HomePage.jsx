@@ -1,13 +1,12 @@
 import React from "react";
-import styles from "./HomePage.module.css";
 
-function HomePage() {
+const HomePage = () => {
   return (
-    <div className={styles.home}>
-      <h1>Welcome to the Contact Book</h1>
-      <p>Manage your contacts efficiently!</p>
+    <div>
+      <h1>Welcome to the Contact Book!</h1>
+      <p>Manage your contacts easily.</p>
     </div>
   );
-}
+};
 
 export default HomePage;

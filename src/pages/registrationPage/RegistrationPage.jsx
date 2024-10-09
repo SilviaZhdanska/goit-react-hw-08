@@ -1,14 +1,13 @@
 import React from "react";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import styles from "./RegistrationPage.module.css";
+import RegistrationForm from "../../components/registrationForm/RegistrationForm";
 
-function RegistrationPage() {
+const RegistrationPage = () => {
   return (
-    <div className={styles.registration}>
+    <div>
       <h1>Register</h1>
       <RegistrationForm />
     </div>
   );
-}
+};
 
 export default RegistrationPage;

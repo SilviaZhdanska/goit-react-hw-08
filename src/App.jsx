@@ -1,19 +1,35 @@
 import React from "react";
-import { Provider } from "react-redux";
-import store from "./redux/store";
-import ContactForm from "./components/contactForm/ContactForm";
-import ContactList from "./components/contactList/ContactList";
-import SearchBox from "./components/searchBox/SearchBox";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/homePage/HomePage.jsx";
+import ContactsPage from "./pages/contactsPage/ContactsPage.jsx";
+import LoginPage from "./pages/loginPage/LoginPage.jsx";
+import RegistrationPage from "./pages/registrationPage/RegistrationPage.jsx";
+import Layout from "./components/layout/Layout";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import RestrictedRoute from "./components/restrictedRoute/RestrictedRoute";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h1>Contact Book</h1>
-      <SearchBox />
-      <ContactForm />
-      <ContactList />
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/register"
+            element={<RestrictedRoute component={RegistrationPage} />}
+          />
+          <Route
+            path="/login"
+            element={<RestrictedRoute component={LoginPage} />}
+          />
+          <Route
+            path="/contacts"
+            element={<PrivateRoute component={ContactsPage} />}
+          />
+        </Routes>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;

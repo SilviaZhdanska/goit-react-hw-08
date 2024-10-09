@@ -1,8 +1,10 @@
+// src/redux/contacts/operations.js
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_URL = "https://connections-api.goit.global/contacts";
 
+// Операція отримання контактів
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, thunkAPI) => {
@@ -15,6 +17,7 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
+// Операція додавання контакту
 export const addContact = createAsyncThunk(
   "contacts/addContact",
   async (contact, thunkAPI) => {
@@ -27,6 +30,20 @@ export const addContact = createAsyncThunk(
   }
 );
 
+// Операція оновлення контакту
+export const updateContact = createAsyncThunk(
+  "contacts/updateContact",
+  async ({ id, contact }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`${API_URL}/${id}`, contact);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Операція видалення контакту
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (id, thunkAPI) => {

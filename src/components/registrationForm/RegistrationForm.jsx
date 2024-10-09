@@ -1,42 +1,30 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
-import styles from "./RegistrationForm.module.css";
-
-const UserSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().min(6, "Too Short!").required("Required"),
-});
+import { toast } from "react-hot-toast";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
-    dispatch(register(values));
-  };
-
   return (
     <Formik
       initialValues={{ name: "", email: "", password: "" }}
-      validationSchema={UserSchema}
-      onSubmit={handleSubmit}
+      onSubmit={(values, { resetForm }) => {
+        dispatch(register(values));
+        toast.success("Registration successful!");
+        resetForm();
+      }}
     >
-      <Form className={styles.form}>
-        <div>
-          <Field name="name" placeholder="Name" />
-          <ErrorMessage name="name" component="div" />
-        </div>
-        <div>
-          <Field name="email" type="email" placeholder="Email" />
-          <ErrorMessage name="email" component="div" />
-        </div>
-        <div>
-          <Field name="password" type="password" placeholder="Password" />
-          <ErrorMessage name="password" component="div" />
-        </div>
+      <Form>
+        <Field name="name" placeholder="Name" required />
+        <Field name="email" placeholder="Email" type="email" required />
+        <Field
+          name="password"
+          placeholder="Password"
+          type="password"
+          required
+        />
         <button type="submit">Register</button>
       </Form>
     </Formik>

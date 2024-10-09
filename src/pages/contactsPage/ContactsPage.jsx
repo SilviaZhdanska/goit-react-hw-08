@@ -1,18 +1,20 @@
-import React from "react";
-import ContactForm from "../../components/ContactForm/ContactForm";
-import ContactList from "../../components/ContactList/ContactList";
-import SearchBox from "../../components/SearchBox/SearchBox";
-import styles from "./ContactsPage.module.css";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchContacts } from "../../redux/contacts/operations";
+import ContactForm from "../../components/contactForm/ContactForm";
 
-function ContactsPage() {
+export default function ContactsPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
-    <div className={styles.contacts}>
-      <h1>Your Contacts</h1>
-      <SearchBox />
+    <div>
+      <h2>Contacts</h2>
       <ContactForm />
       <ContactList />
     </div>
   );
 }
-
-export default ContactsPage;

@@ -1,8 +1,9 @@
+// src/components/contactForm/ContactForm.jsx
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { addContact } from "../../redux/contacts/operations"; // Імпорт з operations
+import { addContact } from "../../redux/contacts/operations";
 import styles from "./ContactForm.module.css";
 
 const UserSchema = Yup.object().shape({
